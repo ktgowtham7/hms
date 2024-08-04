@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bill Details</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: rgb(2,46,135);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: #f2f2f2;
+    }
+
+    .add-button {
+      background-color:green;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      margin-right: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .add-button:hover {
+      background-color: #45a049;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      border-radius: 5px;
+    }
+
+    .modal-content input[type="text"],
+    .modal-content input[type="email"],
+    .modal-content input[type="date"],
+    .modal-content select,
+    .modal-content textarea {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .modal-content input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .modal-content input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    #billDetailsTable {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    #billDetailsTable th, #billDetailsTable td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    #billDetailsTable th {
+      background-color: #f2f2f2;
+    }
+
+    .operations a {
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .update { background-color: #2ecc71; }
+    .delete { background-color: #e74c3c; }
+
+    /* Search bar styles */
+    .search-container {
+      flex: 1;
+      text-align: right;
+    }
+
+    .search-container input[type=text] {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .search-container button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .search-container button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Bill Details</h1>
+</header>
+
+<div class="button-container">
+  <button class="add-button" onclick="openModal()">Add Bill</button>
+  <div class="search-container">
+    <input type="text" placeholder="Search.." name="searchBill">
+    <button type="submit">Search</button>
+  </div>
+</div>
+
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <form id="addBillForm" method="post" action="#">
+      <label for="patientId">Patient ID:</label><br>
+      <input type="text" id="patientId" name="patientId" required><br>
+
+      <label for="patientName">Patient Name:</label><br>
+      <input type="text" id="patientName" name="patientName" required><br>
+
+      <label for="totalAmount">Total Amount:</label><br>
+      <input type="text" id="totalAmount" name="totalAmount" required><br>
+
+      <label for="amountPaid">Amount Paid:</label><br>
+      <input type="text" id="amountPaid" name="amountPaid" required><br>
+
+      <label for="balanceAmount">Balance Amount:</label><br>
+      <input type="text" id="balanceAmount" name="balanceAmount" required><br>
+
+      <label for="modeOfPayment">Mode of Payment:</label><br>
+      <select id="modeOfPayment" name="modeOfPayment" required>
+        <option value="cash">Cash</option>
+        <option value="creditCard">Credit Card</option>
+        <option value="debitCard">Debit Card</option>
+        <option value="online">Online Payment</option>
+      </select><br>
+
+      <label for="transactionId">Transaction ID:</label><br>
+      <input type="text" id="transactionId" name="transactionId" required><br>
+
+      <label for="date">Date:</label><br>
+      <input type="date" id="date" name="date" required><br>
+
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</div>
+
+<table id="billDetailsTable">
+  <thead>
+    <tr>
+      <th>Patient ID</th>
+      <th>Patient Name</th>
+      <th>Total Amount</th>
+      <th>Amount Paid</th>
+      <th>Balance Amount</th>
+      <th>Mode of Payment</th>
+      <th>Transaction ID</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="billDetailsTableBody"></tbody>
+</table>
+
+<script>
+function updateBill(row) {
+  var cells = row.getElementsByTagName("td");
+  var patientId = cells[0].innerText;
+  var patientName = cells[1].innerText;
+  var totalAmount = cells[2].innerText;
+  var amountPaid = cells[3].innerText;
+  var balanceAmount = cells[4].innerText;
+  var modeOfPayment = cells[5].innerText;
+  var transactionId = cells[6].innerText;
+  var date = cells[7].innerText;
+
+  // Populate the form fields with existing data
+  document.getElementById("patientId").value = patientId;
+  document.getElementById("patientName").value = patientName;
+  document.getElementById("totalAmount").value = totalAmount;
+  document.getElementById("amountPaid").value = amountPaid;
+  document.getElementById("balanceAmount").value = balanceAmount;
+  document.getElementById("modeOfPayment").value = modeOfPayment;
+  document.getElementById("transactionId").value = transactionId;
+  document.getElementById("date").value = date;
+
+  // Store the reference to the row being updated
+  document.getElementById("addBillForm").setAttribute("data-row-index", row.rowIndex);
+
+  // Change the form action to indicate update mode
+  document.getElementById("addBillForm").setAttribute("data-mode", "update");
+
+  // Open the modal for updating
+  openModal();
+}
+
+// Function to handle form submission for adding or updating a bill
+document.getElementById("addBillForm").onsubmit = function(event) {
+  event.preventDefault(); // Prevent the form from submitting normally
+
+  // Get form data
+  var patientId = document.getElementById("patientId").value;
+  var patientName = document.getElementById("patientName").value;
+  var totalAmount = document.getElementById("totalAmount").value;
+  var amountPaid = document.getElementById("amountPaid").value;
+  var balanceAmount = document.getElementById("balanceAmount").value;
+  var modeOfPayment = document.getElementById("modeOfPayment").value;
+  var transactionId = document.getElementById("transactionId").value;
+  var date = document.getElementById("date").value;
+
+  // Determine the mode (add or update)
+  var mode = this.getAttribute("data-mode");
+
+  // Get the index of the row being updated
+  var rowIndex = parseInt(this.getAttribute("data-row-index"));
+
+  // Handle adding or updating based on the mode
+  if (mode === "update" && rowIndex >= 0) {
+    // Update mode: Update the existing row with the new data
+    var row = document.getElementById("billDetailsTable").rows[rowIndex];
+    row.cells[0].innerText = patientId;
+    row.cells[1].innerText = patientName;
+    row.cells[2].innerText = totalAmount;
+    row.cells[3].innerText = amountPaid;
+    row.cells[4].innerText = balanceAmount;
+    row.cells[5].innerText = modeOfPayment;
+    row.cells[6].innerText = transactionId;
+    row.cells[7].innerText = date;
+
+    // Update data in local storage
+    updateLocalStorage(patientId, patientName, totalAmount, amountPaid, balanceAmount, modeOfPayment, transactionId, date, rowIndex);
+  } else {
+    // Add mode: Create a new row with the submitted data
+    var newRow = document.getElementById("billDetailsTableBody").insertRow();
+    newRow.innerHTML = "<td>" + patientId + "</td><td>" + patientName + "</td><td>" + totalAmount + "</td><td>" + amountPaid + "</td><td>" + balanceAmount + "</td><td>" + modeOfPayment + "</td><td>" + transactionId + "</td><td>" + date + "</td><td class='operations'><a class='update' href='#' onclick='updateBill(this.parentNode.parentNode)'>Update</a><a class='delete' href='#' onclick='deleteRow(this.parentNode.parentNode)'>Delete</a></td>";
+
+    // Save data to local storage
+    saveToLocalStorage(patientId, patientName, totalAmount, amountPaid, balanceAmount, modeOfPayment, transactionId, date);
+  }
+
+  closeModal();
+
+  // Save data to the database
+  saveToDatabase(patientId, patientName, totalAmount, amountPaid, balanceAmount, modeOfPayment, transactionId, date);
+};
+
+// Function to save bill details to local storage
+function saveToLocalStorage(patientId, patientName, totalAmount, amountPaid, balanceAmount, modeOfPayment, transactionId, date) {
+  var bills = JSON.parse(localStorage.getItem("bills")) || [];
+  bills.push({ patientId: patientId, patientName: patientName, totalAmount: totalAmount, amountPaid: amountPaid, balanceAmount: balanceAmount, modeOfPayment: modeOfPayment, transactionId: transactionId, date: date });
+  localStorage.setItem("bills", JSON.stringify(bills));
+}
+
+function updateLocalStorage(patientId, patientName, totalAmount, amountPaid, balanceAmount, modeOfPayment, transactionId, date, rowIndex) {
+  var bills = JSON.parse(localStorage.getItem("bills")) || [];
+  bills[rowIndex] = { patientId: patientId, patientName: patientName, totalAmount: totalAmount, amountPaid: amountPaid, balanceAmount: balanceAmount, modeOfPayment: modeOfPayment, transactionId: transactionId, date: date };
+  localStorage.setItem("bills", JSON.stringify(bills));
+}
+
+window.onload = function() {
+  loadBillsFromLocalStorage();
+};
+
+function loadBillsFromLocalStorage() {
+  var bills = JSON.parse(localStorage.getItem("bills")) || [];
+  var tableBody = document.getElementById("billDetailsTableBody");
+  bills.forEach(function(bill) {
+    var row = tableBody.insertRow();
+    row.innerHTML = "<td>" + bill.patientId + "</td><td>" + bill.patientName + "</td><td>" + bill.totalAmount + "</td><td>" + bill.amountPaid + "</td><td>" + bill.balanceAmount + "</td><td>" + bill.modeOfPayment + "</td><td>" + bill.transactionId + "</td><td>" + bill.date + "</td><td class='operations'><a class='update' href='#' onclick='updateBill(this.parentNode.parentNode)'>Update</a><a class='delete' href='#' onclick='deleteRow(this.parentNode.parentNode)'>Delete</a></td>";
+  });
+}
+
+function openModal() {
+  document.getElementById("myModal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("myModal").style.display = "none";
+}
+
+function deleteRow(row) {
+  var rowIndex = row.rowIndex - 1; 
+  row.parentNode.removeChild(row);
+  removeFromLocalStorage(rowIndex);
+}
+
+function removeFromLocalStorage(rowIndex) {
+  var bills = JSON.parse(localStorage.getItem("bills")) || [];
+  bills.splice(rowIndex, 1);
+  localStorage.setItem("bills", JSON.stringify(bills));
+}
+
+function saveToDatabase(patientId, patientName, totalAmount, amountPaid, balanceAmount, modeOfPayment, transactionId, date) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      console.log(xhr.responseText);
+    }
+  };
+  xhr.open("POST", "save_bill_data.php", true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send("patientId=" + patientId + "&patientName=" + patientName + "&totalAmount=" + totalAmount + "&amountPaid=" + amountPaid + "&balanceAmount=" + balanceAmount + "&modeOfPayment=" + modeOfPayment + "&transactionId=" + transactionId + "&date=" + date);
+}
+document.querySelector('.search-container button').addEventListener('click', function() {
+  var searchText = document.querySelector('.search-container input').value.toLowerCase();
+  var tableRows = document.querySelectorAll('#billDetailsTableBody tr');
+
+  tableRows.forEach(function(row) {
+    var patientId = row.cells[0].innerText.toLowerCase();
+    var patientName = row.cells[1].innerText.toLowerCase();
+    if (patientId.includes(searchText) || patientName.includes(searchText)) {
+      row.style.display = 'table-row';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+});
+</script>
+
+</body>
+</html>

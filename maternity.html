@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eka Hospital</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .hospital-name {
+            font-size: 24px;
+        }
+
+        .book-appointment {
+            background-color: #e5e6e8;
+            color: rgb(74, 109, 215);
+            border-radius: 5px;
+            font-weight: bold;
+            height: 30px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0 15px;
+        }
+
+        .book-appointment:hover {
+            background-color: #669fdc;
+            color:white;
+        }
+
+        .hospital-photo {
+            width: 100%;
+            height: 560px; /* Adjusted height */
+            object-fit: cover; /* Maintain aspect ratio */
+        }
+
+        .overview {
+            padding: 20px;
+        }
+
+        .overview h3 {
+            margin-top: 20px;
+            color: #007bff; /* Changed color */
+        }
+
+        .overview p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .overview ol {
+            margin-left: 20px;
+            padding-left: 20px;
+            list-style: none;
+            counter-reset: list-counter; /* Reset counter */
+        }
+
+        .overview ol li {
+            position: relative;
+            padding-left: 30px; /* Adjusted padding */
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .overview ol li::before {
+            content: counter(list-counter);
+            counter-increment: list-counter; /* Increment counter */
+            position: absolute;
+            left: 0;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .experts {
+            display: flex;
+            overflow-x: auto;
+            margin-top: 20px;
+            padding: 30px;
+            margin-left: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff; /* Added background color */
+
+        }
+
+        .expert {
+            margin-right: 20px; /* Adjusted margin */
+            background-color: #f9f9f9; /* Changed background color */
+            border-radius: 10px; /* Adjusted border radius */
+            padding: 30px; /* Adjusted padding */
+            width: 200px;
+            
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .expert:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .expert img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 10px; /* Centered image */
+            display: block;
+        }
+
+        .expert .info {
+            text-align: center;
+        }
+
+        .expert h4 {
+            margin: 5px 0;
+            font-size: 20px;
+            color: #007bff;
+        }
+
+        .expert p {
+            margin: 3px 0;
+            font-size: 16px;
+            color: #666;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            height: 30px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0 15px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%; /* Centered horizontally */
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+            font-weight: bold;
+            color:  rgb(203, 206, 211);
+            z-index: 1; /* Ensure text is above image */
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: right;
+            position: relative;
+            bottom: 0;
+            
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            float:center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="hospital-name">Eka Hospital</div>
+            <button class="book-appointment">Book Appointment</button>
+        </div>
+    </header>
+
+    <img src="https://media.istockphoto.com/id/1063148786/photo/photo-of-newborn-baby-fingers.jpg?s=612x612&w=0&k=20&c=oS0DoPdkCZwrAUH7fUD4N0FkITHBSO8F3D8jiBesUhU=" alt="Hospital Photo" class="hospital-photo">
+    <h1>Maternity</h1>
+
+    <section class="overview">
+        <h2>Overview</h2>
+
+        <p>Eka Hospital's Maternity department provides comprehensive care and support for expectant mothers throughout their pregnancy, childbirth, and postpartum period.
+        Our team of obstetricians, midwives, and support staff are committed to ensuring a safe and positive experience for both mother and baby.</p>
+
+        <h2> Features:</h2>
+        <ol>
+            <li>Antenatal Care</li>
+            <li>Labour and Delivery Services</li>
+            <li>Postpartum Care</li>
+            <li>Newborn Care</li>
+            <li>Breastfeeding Support</li>
+            <li>Parenting Classes</li>
+            <li>High-Risk Pregnancy Management</li>
+            <li>Ultrasound Services</li>
+            <li>Childbirth Education</li>
+        </ol>
+
+        <h2> Treatment:</h2>
+        <ol>
+            <li>Antenatal Care: Regular check-ups and screenings to monitor the health of the mother and baby during pregnancy.</li>
+            <li>Labour and Delivery Services: Support and assistance during childbirth, including pain management options and medical interventions if needed.</li>
+            <li>Postpartum Care: Monitoring and support for the mother's recovery after childbirth, including breastfeeding assistance and emotional support.</li>
+            <li>Newborn Care: Medical care and assessments for newborn babies, including vaccinations and screenings for developmental milestones.</li>
+            <li>Breastfeeding Support: Education and assistance for mothers to establish successful breastfeeding and address any challenges.</li>
+            <li>Parenting Classes: Education and guidance for expectant parents on topics such as infant care, safety, and nutrition.</li>
+            <li>High-Risk Pregnancy Management: Specialized care and monitoring for pregnancies with complications or medical conditions.</li>
+            <li>Ultrasound Services: Imaging scans to monitor fetal development and detect any abnormalities during pregnancy.</li>
+            <li>Childbirth Education: Classes and workshops to prepare expectant parents for labor, delivery, and early parenthood.</li>
+        </ol>
+        <h2>Experts</h2>
+        <div class="experts">
+            <div class="expert">
+                <img src="https://media.istockphoto.com/id/177839842/photo/smiling-doctor-woman-with-arms-crossed.jpg?s=612x612&w=0&k=20&c=infRKfdmTMS8WYFZHF_GPuBpLPszyyXhiP5Er9a50jA=" alt="Expert Photo">
+                <div class="info">
+                    <h4>Name: Dr.Priya</h4>
+                    <p>Specialty: Obstetrics</p>
+                    <p>Experiance:10years+</p>
+                    <a href="appointment.php"><button>Book Appointment</button></a>
+                </div>
+            </div>
+            <div class="expert">
+                <img src="https://media.istockphoto.com/id/1394769128/photo/nurse-with-medical-file-at-hospital.jpg?s=612x612&w=0&k=20&c=kmgF0KSnG0p2OylR4s8lrOPqyo8d0CUzNDGNliYBYsg=" alt="Expert Photo">
+                <div class="info">
+                    <h4>Name: Dr. Vaishnavi</h4>
+                    <p>Specialty: Midwifery</p>
+                    <p>Experiance:22years+</p>
+                    <a href="appointment.php"><button>Book Appointment</button></a>
+                </div>
+            </div>
+            <div class="expert">
+                <img src="https://media.istockphoto.com/id/1349705078/photo/portrait-of-female-doctor-wearing-white-coat-with-digital-tablet-in-busy-hospital.jpg?s=612x612&w=0&k=20&c=p25H6-cdjmXLwz0ntpEw3K38gbRzNIIuMf-NBF2UdgE=" alt="Expert Photo">
+                <div class="info">
+                    <h4>Name: Dr. Samantha</h4>
+                    <p>Specialty: Neonatology</p>
+                    <p>Experiance:16years+</p>
+                    <a href="appointment.php"><button>Book Appointment</button></a>
+                </div>
+            </div>
+            <div class="expert">
+                <img src="https://media.istockphoto.com/id/1340771579/photo/portrait-of-confident-indian-doctor-wear-white-coat-standing-at-outdoors-with-arms-crossed-on.jpg?s=612x612&w=0&k=20&c=9g8mlxBKEJsVEPE4fy78SYujUHQ-4byy0F5Mp9lX1uY=" alt="Expert Photo">
+                <div class="info">
+                    <h4>Name: Dr. Amulya</h4>
+                    <p>Specialty: Lactation Consultation</p>
+                    <p>Experiance:13years+</p>
+                    <a href="appointment.php"><button>Book Appointment</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p style="margin-left:470px;">&copy; 2024 Eka Hospital. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eka Hospital</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .hospital-name {
+            font-size: 24px;
+        }
+
+        .book-appointment {
+            background-color: #e5e6e8;
+            color: rgb(74, 109, 215);
+            border-radius: 5px;
+            font-weight: bold;
+            height: 30px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0 15px;
+        }
+
+        .book-appointment:hover {
+            background-color: #669fdc;
+            color:white;
+        }
+
+        .hospital-photo {
+            width: 100%;
+            height: 560px; /* Adjusted height */
+            object-fit: cover; /* Maintain aspect ratio */
+        }
+
+        .overview {
+            padding: 20px;
+        }
+
+        .overview h3 {
+            margin-top: 20px;
+            color: #007bff; /* Changed color */
+        }
+
+        .overview p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .overview ol {
+            margin-left: 20px;
+            padding-left: 20px;
+            list-style: none;
+            counter-reset: list-counter; /* Reset counter */
+        }
+
+        .overview ol li {
+            position: relative;
+            padding-left: 30px; /* Adjusted padding */
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .overview ol li::before {
+            content: counter(list-counter);
+            counter-increment: list-counter; /* Increment counter */
+            position: absolute;
+            left: 0;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .experts {
+            display: flex;
+            overflow-x: auto;
+            margin-top: 20px;
+            padding: 30px;
+            margin-left: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff; /* Added background color */
+
+        }
+
+        .expert {
+            margin-right: 20px; /* Adjusted margin */
+            background-color: #f9f9f9; /* Changed background color */
+            border-radius: 10px; /* Adjusted border radius */
+            padding: 30px; /* Adjusted padding */
+            width: 200px;
+            
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .expert:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .expert img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 10px; /* Centered image */
+            display: block;
+        }
+
+        .expert .info {
+            text-align: center;
+        }
+
+        .expert h4 {
+            margin: 5px 0;
+            font-size: 20px;
+            color: #007bff;
+        }
+
+        .expert p {
+            margin: 3px 0;
+            font-size: 16px;
+            color: #666;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            height: 30px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0 15px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%; /* Centered horizontally */
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+            font-weight: bold;
+            color:  rgb(203, 206, 211);
+            z-index: 1; /* Ensure text is above image */
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: right;
+            position: relative;
+            bottom: 0;
+            
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            float:center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="hospital-name">Eka Hospital</div>
+            <button class="book-appointment">Book Appointment</button>
+        </div>
+    </header>
+
+    <img src="https://media.istockphoto.com/id/1461352916/photo/sportsman-patient-undergoing-physical-therapy-in-clinic-to-recover-from-surgery-and-increase.jpg?s=612x612&w=0&k=20&c=QSxVbZ6MlMJCGwpgUuM7VqawpKDkXSOWFQTn_pQSb68=" alt="Hospital Photo" class="hospital-photo">
+    <h1>Physiotherapy</h1>
+
+    <section class="overview">
+        <h2>Overview</h2>
+
+        <p>Eka Hospital's Physiotherapy department offers a wide range of services aimed at restoring function, improving mobility, and enhancing overall quality of life for patients recovering from injury, illness, or surgery.</p>
+        <p>Our team of experienced physiotherapists utilizes evidence-based techniques and personalized treatment plans to address each patient's unique needs and goals.</p>
+
+        <h2> Features:</h2>
+        <ol>
+            <li>Comprehensive Assessment and Evaluation</li>
+            <li>Individualized Treatment Plans</li>
+            <li>State-of-the-Art Rehabilitation Equipment</li>
+            <li>Manual Therapy Techniques</li>
+            <li>Therapeutic Exercise Programs</li>
+            <li>Pain Management Strategies</li>
+            <li>Balance and Gait Training</li>
+            <li>Postural Correction</li>
+            <li>Education and Home Exercise Programs</li>
+        </ol>
+
+        <h2> Treatment:</h2>
+        <ol>
+            <li>Manual Therapy: Hands-on techniques to mobilize joints, improve flexibility, and reduce pain.</li>
+            <li>Therapeutic Exercise: Customized exercise programs to strengthen muscles, improve endurance, and enhance functional capacity.</li>
+            <li>Electrotherapy: Use of electrical modalities such as ultrasound, TENS, and electrical stimulation to manage pain and promote tissue healing.</li>
+            <li>Joint Mobilization: Techniques to restore normal joint mechanics and improve range of motion.</li>
+            <li>Soft Tissue Mobilization: Massage and stretching techniques to release muscle tension and improve tissue flexibility.</li>
+            <li>Neuromuscular Re-education: Exercises and activities to improve coordination, balance, and proprioception.</li>
+            <li>Gait Training: Rehabilitation exercises to improve walking pattern and restore normal gait mechanics.</li>
+            <li>Postural Correction: Strategies to improve posture and prevent musculoskeletal dysfunction.</li>
+            <li>Functional Training: Activities designed to simulate real-life movements and improve functional independence.</li>
+        </ol>
+        <h2>Experts</h2>
+        <div class="experts">
+            <div class="expert">
+                <img src="https://media.istockphoto.com/id/1124684854/photo/portrait-of-indian-doctor.jpg?s=612x612&w=0&k=20&c=z07-F84erAbm8Z_sVJhLXdaJBfMFSiJjf_uaHg7Z3sY=" alt="Expert Photo">
+                <div class="info">
+                    <h4>Name: Dr. Anand</h4>
+                    <p>Specialty: Physiotherapy</p>
+                    <p>Experiance:25years+</p>
+                    <a href="appointment.php"><button>Book Appointment</button></a>
+                </div>
+            </div>
+            <div class="expert">
+                
+                <img src="https://media.istockphoto.com/id/1342708859/photo/portrait-of-a-male-doctor.jpg?s=612x612&w=0&k=20&c=7ojvfSnLNx73sR1xXTReBrIXJOZPpSNFZ3E9CodsfQU=" alt="Expert Photo">
+               
+                <div class="info">
+                    <h4>Name: Dr. Dinesh</h4>
+                    <p>Specialty: Physiotherapy</p>
+                    <p>Experiance:22years+</p>
+                    <a href="appointment.php"><button>Book Appointment</button></a>
+                </div>
+            </div>
+            <div class="expert">
+                <img src="https://media.istockphoto.com/id/1302924697/photo/female-doctor-arm-crossed-confidence-stock-photo.jpg?s=612x612&w=0&k=20&c=unoU1gtKjPZt7W_lQ9ubFmpuvsnHI8GADRvmsnzYkac=" alt="Expert Photo">
+                <div class="info">
+                    <h4>Name: Dr.Sushma</h4>
+                    <p>Specialty: Physiotherapy</p>
+                    <p>Experiance:19years+</p>
+                    <a href="appointment.php"><button>Book Appointment</button></a>
+                </div>
+            </div>
+            <div class="expert">
+                <img src="https://media.istockphoto.com/id/1302927786/photo/mid-adult-female-doctor-using-phone-at-clinic-stock-photo.jpg?s=612x612&w=0&k=20&c=eQxOmQO9qXZxeVa1RpZDhPOJ_r4Gop9oFP_4dE1SNvY=" alt="Expert Photo">
+                <div class="info">
+                    <h4>Name: Dr. Michael </h4>
+                    <p>Specialty: Physiotherapy</p>
+                      <p>Experiance:10years+</p>
+                    <a href="appointment.php"><button>Book Appointment</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p style="margin-left:470px;">&copy; 2024 Eka Hospital. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

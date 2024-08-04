@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        
+        header {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            display: flex;
+            background-color:  rgb(2,46,135);
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        header h1 {
+            margin: 0;
+        }
+        
+        nav {
+            background-color:#007bff;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        
+        nav ul {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+        
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+        
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        nav ul li a:hover {
+            color: #ccc;
+        }
+        
+        button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            border-radius: 4px; /* Rounded Corners */
+            color: white;
+            padding: 12px 24px; /* Top/Bottom Padding: 12px, Left/Right Padding: 24px */
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Shadow Effect */
+            transition: background-color 0.3s ease; /* Smooth Background Transition */
+            -webkit-tap-highlight-color: transparent; /* Disable Highlight */
+        }
+
+        button:hover {
+            background-color: #191a19; /* Darker Green */
+        }
+
+        main {
+            padding: 70px;
+            display: flex;
+            flex-wrap: wrap;
+
+            justify-content: center;
+        }
+        
+        section {
+            background-color: #fff;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 200px; /* Adjust the width as needed */
+            text-align: center;
+        }
+        
+        section h2 {
+            color: #333;
+        }
+        
+        section p {
+            color: #666;
+        }
+        
+        section a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        section a:hover {
+            color: #007bff; /* Change hover color for each section */
+        }
+        
+        /* Different hover colors for each section */
+        section#appointments a:hover {
+            color: #ff6f61;
+        }
+        
+        section#doctors a:hover {
+            color: #ffd166;
+        }
+        
+        section#patients a:hover {
+            color: #06d6a0;
+        }
+        
+        section#billing a:hover {
+            color: #118ab2;
+        }
+        
+        section#medicine a:hover {
+            color: #ffbb00; /* Adjust hover color for medicine section */
+        }
+        
+        section#report a:hover {
+            color: #ff0000; /* Adjust hover color for report section */
+        }
+        
+       
+        
+        @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            nav {
+                margin-top: 20px;
+            }
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+            nav ul li:last-child {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome Doctor</h1>
+        <button id="logoutBtn">Logout</button>
+    </header>
+    
+    <main>
+        <section id="appointments">
+            <a href="doctor_appointments.php"><h2>Appointments</h2></a>
+        </section>
+        <section id="doctors">
+            <a href="doc.html"><h2>Doctor's Details</h2></a>
+        </section>
+        <section id="patients">
+            <a href="patient_management.html"><h2>Patients Details</h2></a>
+        </section>
+        
+      
+        <section id="medicine">
+            <a href="medicine_management_system.html"><h2>Medicine Details</h2></a>
+        </section>
+        
+        
+        <section id="report">
+            <a href="report_management.html"><h2>Report Details</h2></a>
+        </section>
+
+        <section id="billing">
+            <a href="bill.php"><h2>Generate Bill</h2></a>
+            
+            </section>
+            <section id="billdetails">
+                <a href="billdetails.html"><h2>Bill Details</h2></a>
+        </section>
+    </main>
+    
+   
+
+    <script>
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+          
+            window.location.href = 'logout.php'; 
+        });
+    </script>
+</body>
+</html>

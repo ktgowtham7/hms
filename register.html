@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor Registration</title>
+    <style>
+      body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color:rgb(148, 140, 140) /* Dark blue background */
+}
+
+.container {
+    max-width: 500px;
+    margin: 10px auto;
+    font-size: 18px;
+    border:2px solid  rgb(2,46,135);
+    background-color:white; /* Light blue background */
+    padding: 20px;
+    color: rgb(2,46,135);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(186, 51, 51, 0.1); /* Drop shadow */
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color:  rgb(2,46,135); /* Dark gray color */
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color:  rgb(2,46,135); 
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #f7f6f6;
+    border-radius: 5px;
+    font-size :15px; 
+    box-sizing: border-box;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+    background-color: #391cf5;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #e2e8e2;color:black; 
+}
+
+.back-link {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #f4f8fc;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Doctor Registration</h2>
+        <form id="registerForm" action="register.php" method="post">
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <select id="department" name="department" required>
+                    <option value="Cardiology">Cardiology</option>
+                    <option value="Neurology">Nephrology</option>
+                    <option value="Physiotherapy">Physiotherapy</option>
+                    <option value="Orthopedics">Dental</option>
+                 
+                </select>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        <a href="index.html" class="back-link">Back to Home</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Report Management System</title>
+  <style>
+    /* Global styles */
+    /* Global styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header styles */
+header {
+  background-color:  rgb(2,46,135);
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0;
+}
+
+/* Button styles */
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f2f2f2;
+}
+
+.add-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.add-button:hover {
+  background-color: #45a049;
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  border-radius: 5px;
+}
+
+/* Form styles */
+.modal-content input[type="text"],
+.modal-content input[type="date"],
+.modal-content textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.modal-content input[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.modal-content input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Table styles */
+#reportsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+#reportsTable th, #reportsTable td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#reportsTable th {
+  background-color: #f2f2f2;
+}
+
+.operations a {
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.update { background-color: #2ecc71; }
+.delete { background-color: #e74c3c; }
+
+/* Search bar styles */
+.search-container {
+  flex: 1;
+  text-align: right;
+  margin-top: 10px;
+}
+
+.search-container input[type=text] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.search-container button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background-color: #2980b9;
+}
+
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <h1>Report Details</h1>
+</header>
+
+<!-- Button container with Add Report button and Search bar -->
+<div class="button-container">
+  <button class="add-button" onclick="openModal()">Add Report</button>
+  <div class="search-container">
+    <input type="text" placeholder="Search.." name="searchReport">
+    <button type="submit">Search</button>
+  </div>
+</div>
+
+<!-- The modal -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <!-- Form for adding a report -->
+    <form id="addReportForm" method="post" action="#">
+      <label for="patientId">Patient ID:</label><br>
+      <input type="text" id="patientId" name="patientId" required><br>
+
+      <label for="patientName">Patient Name:</label><br>
+      <input type="text" id="patientName" name="patientName" required><br>
+
+      <label for="testName">Test Name:</label><br>
+      <input type="text" id="testName" name="testName" required><br>
+
+      <label for="result">Result:</label><br>
+      <textarea id="result" name="result" rows="4" cols="50" required></textarea><br>
+
+      <label for="date">Date:</label><br>
+      <input type="date" id="date" name="date" required><br>
+
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</div>
+
+<!-- Table to display report details -->
+<table id="reportsTable">
+  <thead>
+    <tr>
+      <th>Patient ID</th>
+      <th>Patient Name</th>
+      <th>Test Name</th>
+      <th>Result</th>
+      <th>Date</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="reportsTableBody"></tbody>
+</table>
+
+<script>
+// Function to handle updating a report's data
+function updateReport(row) {
+  // Extract existing data from the row
+  var cells = row.getElementsByTagName("td");
+  var patientId = cells[0].innerText;
+  var patientName = cells[1].innerText;
+  var testName = cells[2].innerText;
+  var result = cells[3].innerText;
+  var date = cells[4].innerText;
+
+  // Populate the form fields with existing data
+  document.getElementById("patientId").value = patientId;
+  document.getElementById("patientName").value = patientName;
+  document.getElementById("testName").value = testName;
+  document.getElementById("result").value = result;
+  document.getElementById("date").value = date;
+
+  // Store the reference to the row being updated
+  document.getElementById("addReportForm").setAttribute("data-row-index", row.rowIndex);
+
+  // Change the form action to indicate update mode
+  document.getElementById("addReportForm").setAttribute("data-mode", "update");
+
+  // Open the modal for updating
+  openModal();
+}
+
+// Function to handle form submission for adding or updating a report
+document.getElementById("addReportForm").onsubmit = function(event) {
+  event.preventDefault(); // Prevent the form from submitting normally
+
+  // Get form data
+  var patientId = document.getElementById("patientId").value;
+  var patientName = document.getElementById("patientName").value;
+  var testName = document.getElementById("testName").value;
+  var result = document.getElementById("result").value;
+  var date = document.getElementById("date").value;
+
+  // Determine the mode (add or update)
+  var mode = this.getAttribute("data-mode");
+
+  // Get the index of the row being updated
+  var rowIndex = parseInt(this.getAttribute("data-row-index"));
+
+  // Handle adding or updating based on the mode
+  if (mode === "update" && rowIndex >= 0) {
+    // Update mode: Update the existing row with the new data
+    var row = document.getElementById("reportsTable").rows[rowIndex];
+    row.cells[0].innerText = patientId;
+    row.cells[1].innerText = patientName;
+    row.cells[2].innerText = testName;
+    row.cells[3].innerText = result;
+    row.cells[4].innerText = date;
+
+    // Update data in local storage
+    updateLocalStorage(patientId, patientName, testName, result, date, rowIndex);
+  } else {
+    // Add mode: Create a new row with the submitted data
+    var newRow = document.getElementById("reportsTableBody").insertRow();
+    newRow.innerHTML = "<td>" + patientId + "</td><td>" + patientName + "</td><td>" + testName + "</td><td>" + result + "</td><td>" + date + "</td><td class='operations'><a class='update' href='#' onclick='updateReport(this.parentNode.parentNode)'>Update</a><a class='delete' href='#' onclick='deleteRow(this.parentNode.parentNode)'>Delete</a></td>";
+
+    // Save data to local storage
+    saveToLocalStorage(patientId, patientName, testName, result, date);
+  }
+
+  // Close the modal
+  closeModal();
+
+  // Save data to the database
+  saveToDatabase(patientId, patientName, testName, result, date);
+};
+
+// Function to save report details to local storage
+function saveToLocalStorage(patientId, patientName, testName, result, date) {
+  var reports = JSON.parse(localStorage.getItem("reports")) || [];
+  reports.push({ patientId: patientId, patientName: patientName, testName: testName, result: result, date: date });
+  localStorage.setItem("reports", JSON.stringify(reports));
+}
+
+// Function to update data for a specific report in local storage
+function updateLocalStorage(patientId, patientName, testName, result, date, rowIndex) {
+  var reports = JSON.parse(localStorage.getItem("reports")) || [];
+  reports[rowIndex] = { patientId: patientId, patientName: patientName, testName: testName, result: result, date: date };
+  localStorage.setItem("reports", JSON.stringify(reports));
+}
+
+// Function to load reports from local storage when the page loads
+window.onload = function() {
+  loadReportsFromLocalStorage();
+};
+
+// Function to load reports from local storage
+function loadReportsFromLocalStorage() {
+  var reports = JSON.parse(localStorage.getItem("reports")) || [];
+  var tableBody = document.getElementById("reportsTableBody");
+  reports.forEach(function(report) {
+    var row = tableBody.insertRow();
+    row.innerHTML = "<td>" + report.patientId + "</td><td>" + report.patientName + "</td><td>" + report.testName + "</td><td>" + report.result + "</td><td>" + report.date + "</td><td class='operations'><a class='update' href='#' onclick='updateReport(this.parentNode.parentNode)'>Update</a><a class='delete' href='#' onclick='deleteRow(this.parentNode.parentNode)'>Delete</a></td>";
+  });
+}
+
+// JavaScript to open and close the modal
+function openModal() {
+  document.getElementById("myModal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("myModal").style.display = "none";
+}
+
+// Function to delete a row
+function deleteRow(row) {
+  var rowIndex = row.rowIndex - 1; // Adjusting for the header row
+  row.parentNode.removeChild(row);
+  removeFromLocalStorage(rowIndex);
+}
+
+// Function to remove report data from local storage
+function removeFromLocalStorage(rowIndex) {
+  var reports = JSON.parse(localStorage.getItem("reports")) || [];
+  reports.splice(rowIndex, 1);
+  localStorage.setItem("reports", JSON.stringify(reports));
+}
+
+// Function to save data to the database
+function saveToDatabase(patientId, patientName, testName, result, date) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      // Handle the response from the server if needed
+      console.log(xhr.responseText);
+    }
+  };
+
+
+
+
+  xhr.open("POST", "save_report_data.php", true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send("patientId=" + patientId + "&patientName=" + patientName + "&testName=" + testName + "&result=" + result + "&date=" + date);
+}
+ // Function to handle search functionality
+document.querySelector('.search-container button').addEventListener('click', function() {
+  var searchText = document.querySelector('.search-container input').value.toLowerCase();
+  var tableRows = document.querySelectorAll('#reportsTableBody tr');
+
+  tableRows.forEach(function(row) {
+    var patientId = row.cells[0].innerText.toLowerCase();
+    var patientName = row.cells[1].innerText.toLowerCase();
+    if (patientId.includes(searchText) || patientName.includes(searchText)) {
+      row.style.display = 'table-row';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+});
+
+</script>
+
+</body>
+</html>

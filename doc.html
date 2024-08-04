@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Management System</title>
+  <style>
+    /* Global styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header styles */
+    header {
+      background-color:  rgb(2,46,135);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    /* Button styles */
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: #f2f2f2;
+    }
+
+    .add-button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      margin-right: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .add-button:hover {
+      background-color: #45a049;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      border-radius: 5px;
+    }
+
+    /* Form styles */
+    .modal-content input[type="text"],
+    .modal-content input[type="email"],
+    .modal-content input[type="date"],
+    .modal-content select,
+    .modal-content textarea {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .modal-content input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .modal-content input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    /* Table styles */
+    #doctorsTable {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    #doctorsTable th, #doctorsTable td {
+      border: 1px solid #ddd;
+      padding: 8px;
+    }
+
+    #doctorsTable th {
+      background-color: #f2f2f2;
+    }
+
+    .operations a {
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .update { background-color: #2ecc71; }
+    .delete { background-color: #e74c3c; }
+
+    /* Search bar styles */
+    .search-container {
+      flex: 1;
+      text-align: right;
+    }
+
+    .search-container input[type=text] {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .search-container button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .search-container button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <h1>Doctor Details</h1>
+</header>
+
+<!-- Button container with Add Doctor button and Search bar -->
+<div class="button-container">
+  <button class="add-button" onclick="openModal()">Add Doctor</button>
+  <div class="search-container">
+    <input type="text" placeholder="Search.." name="searchDoctor">
+    <button type="submit">Search</button>
+  </div>
+</div>
+
+<!-- The modal -->
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <!-- Form for adding a doctor -->
+    <form id="addDoctorForm" method="post" action="#">
+      <label for="doctorId">Doctor ID:</label><br>
+      <input type="text" id="doctorId" name="doctorId" required><br>
+
+      <label for="name">Name:</label><br>
+      <input type="text" id="name" name="name" required><br>
+
+      <label for="department">Department:</label><br>
+      <input type="text" id="department" name="department" required><br>
+
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" required><br>
+
+      <label for="dob">Date of Birth:</label><br>
+      <input type="date" id="dob" name="dob" required><br>
+
+      <label for="address">Address:</label><br>
+      <textarea id="address" name="address" rows="4" required></textarea><br>
+
+      <label for="phone">Phone Number:</label><br>
+      <input type="text" id="phone" name="phone" required><br>
+
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+</div>
+
+<!-- Table to display doctor details -->
+<table id="doctorsTable">
+  <thead>
+    <tr>
+      <th>Doctor ID</th>
+      <th>Name</th>
+      <th>Department</th>
+      <th>Email</th>
+      <th>Date of Birth</th>
+      <th>Address</th>
+      <th>Phone Number</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="doctorsTableBody"></tbody>
+</table>
+
+<script>
+// Function to handle updating a doctor's data
+function updateDoctor(row) {
+  // Extract existing data from the row
+  var cells = row.getElementsByTagName("td");
+  var doctorId = cells[0].innerText;
+  var name = cells[1].innerText;
+  var department = cells[2].innerText;
+  var email = cells[3].innerText;
+  var dob = cells[4].innerText;
+  var address = cells[5].innerText;
+  var phone = cells[6].innerText;
+
+  // Populate the form fields with existing data
+  document.getElementById("doctorId").value = doctorId;
+  document.getElementById("name").value = name;
+  document.getElementById("department").value = department;
+  document.getElementById("email").value = email;
+  document.getElementById("dob").value = dob;
+  document.getElementById("address").value = address;
+  document.getElementById("phone").value = phone;
+
+  // Store the reference to the row being updated
+  document.getElementById("addDoctorForm").setAttribute("data-row-index", row.rowIndex);
+
+  // Change the form action to indicate update mode
+  document.getElementById("addDoctorForm").setAttribute("data-mode", "update");
+
+  // Open the modal for updating
+  openModal();
+}
+
+// Function to handle form submission for adding or updating a doctor
+document.getElementById("addDoctorForm").onsubmit = function(event) {
+  event.preventDefault(); // Prevent the form from submitting normally
+
+  // Get form data
+  var doctorId = document.getElementById("doctorId").value;
+  var name = document.getElementById("name").value;
+  var department = document.getElementById("department").value;
+  var email = document.getElementById("email").value;
+  var dob = document.getElementById("dob").value;
+  var address = document.getElementById("address").value;
+  var phone = document.getElementById("phone").value;
+
+  // Determine the mode (add or update)
+  var mode = this.getAttribute("data-mode");
+
+  // Get the index of the row being updated
+  var rowIndex = parseInt(this.getAttribute("data-row-index"));
+
+  // Handle adding or updating based on the mode
+  if (mode === "update" && rowIndex >= 0) {
+    // Update mode: Update the existing row with the new data
+    var row = document.getElementById("doctorsTable").rows[rowIndex];
+    row.cells[0].innerText = doctorId;
+    row.cells[1].innerText = name;
+    row.cells[2].innerText = department;
+    row.cells[3].innerText = email;
+    row.cells[4].innerText = dob;
+    row.cells[5].innerText = address;
+    row.cells[6].innerText = phone;
+
+    // Update data in local storage
+    updateLocalStorage(doctorId, name, department, email, dob, address, phone, rowIndex);
+  } else {
+    // Add mode: Create a new row with the submitted data
+    var newRow = document.getElementById("doctorsTableBody").insertRow();
+    newRow.innerHTML = "<td>" + doctorId + "</td><td>" + name + "</td><td>" + department + "</td><td>" + email + "</td><td>" + dob + "</td><td>" + address + "</td><td>" + phone + "</td><td class='operations'><a class='update' href='#' onclick='updateDoctor(this.parentNode.parentNode)'>Update</a><a class='delete' href='#' onclick='deleteRow(this.parentNode.parentNode)'>Delete</a></td>";
+
+    // Save data to local storage
+    saveToLocalStorage(doctorId, name, department, email, dob, address, phone);
+  }
+
+  // Close the modal
+  closeModal();
+
+  // Save data to the database
+  saveToDatabase(doctorId, name, department, email, dob, address, phone);
+};
+
+// Function to save doctor details to local storage
+function saveToLocalStorage(doctorId, name, department, email, dob, address, phone) {
+  var doctors = JSON.parse(localStorage.getItem("doctors")) || [];
+  doctors.push({ doctorId: doctorId, name: name, department: department, email: email, dob: dob, address: address, phone: phone });
+  localStorage.setItem("doctors", JSON.stringify(doctors));
+}
+
+// Function to update data for a specific doctor in local storage
+function updateLocalStorage(doctorId, name, department, email, dob, address, phone, rowIndex) {
+  var doctors = JSON.parse(localStorage.getItem("doctors")) || [];
+  doctors[rowIndex] = { doctorId: doctorId, name: name, department: department, email: email, dob: dob, address: address, phone: phone };
+  localStorage.setItem("doctors", JSON.stringify(doctors));
+}
+
+// Function to load doctors from local storage when the page loads
+window.onload = function() {
+  loadDoctorsFromLocalStorage();
+};
+
+// Function to load doctors from local storage
+function loadDoctorsFromLocalStorage() {
+  var doctors = JSON.parse(localStorage.getItem("doctors")) || [];
+  var tableBody = document.getElementById("doctorsTableBody");
+  doctors.forEach(function(doctor) {
+    var row = tableBody.insertRow();
+    row.innerHTML = "<td>" + doctor.doctorId + "</td><td>" + doctor.name + "</td><td>" + doctor.department + "</td><td>" + doctor.email + "</td><td>" + doctor.dob + "</td><td>" + doctor.address + "</td><td>" + doctor.phone + "</td><td class='operations'><a class='update' href='#' onclick='updateDoctor(this.parentNode.parentNode)'>Update</a><a class='delete' href='#' onclick='deleteRow(this.parentNode.parentNode)'>Delete</a></td>";
+  });
+}
+
+// JavaScript to open and close the modal
+function openModal() {
+  document.getElementById("myModal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("myModal").style.display = "none";
+}
+
+// Function to delete a row
+function deleteRow(row) {
+  var rowIndex = row.rowIndex - 1; // Adjusting for the header row
+  row.parentNode.removeChild(row);
+  removeFromLocalStorage(rowIndex);
+}
+
+// Function to remove doctor data from local storage
+function removeFromLocalStorage(rowIndex) {
+  var doctors = JSON.parse(localStorage.getItem("doctors")) || [];
+  doctors.splice(rowIndex, 1);
+  localStorage.setItem("doctors", JSON.stringify(doctors));
+}
+
+// Function to save data to the database
+function saveToDatabase(doctorId, name, department, email, dob, address, phone) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState === XMLHttpRequest.DONE) {
+      // Handle the response from the server if needed
+      console.log(xhr.responseText);
+    }
+  };
+  xhr.open("POST", "save_data.php", true);
+  xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhr.send("doctorId=" + doctorId + "&name=" + name + "&department=" + department + "&email=" + email + "&dob=" + dob + "&address=" + address + "&phone=" + phone);
+}
+// Function to handle search functionality
+document.querySelector('.search-container button').addEventListener('click', function() {
+  var searchText = document.querySelector('.search-container input').value.toLowerCase();
+  var tableRows = document.querySelectorAll('#doctorsTableBody tr');
+
+  tableRows.forEach(function(row) {
+    var doctorId = row.cells[0].innerText.toLowerCase();
+    var name = row.cells[1].innerText.toLowerCase();
+    var department = row.cells[2].innerText.toLowerCase();
+    if (doctorId.includes(searchText) || name.includes(searchText) || department.includes(searchText)) {
+      row.style.display = 'table-row';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+});
+
+</script>
+
+</body>
+</html>

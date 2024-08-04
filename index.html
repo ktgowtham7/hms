@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="handyman1.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
+    <style>
+      html{
+        scroll-behavior: smooth;
+        scroll-padding: 78px;
+      }
+     body{
+       margin: 0px;
+            padding: 0px;
+        box-sizing: border-box;
+    background:white;
+    overflow-x: hidden;
+    color:black;
+     }
+    
+     nav .logo p{
+      float:left;
+      font-weight:bold;
+      letter-spacing: 1.5px;
+      font-size: 30px;
+      color: white;
+      margin-top: 18px;
+      margin-left: 1px;
+     }
+        
+        nav{
+            width:100%;
+            height:75px;
+            line-height: 75px;
+            padding:0 100px;
+            position: fixed;
+            background-color: rgb(2,46,135);
+        }
+        nav ul{
+            float: :right;
+            margin-left:550px;
+        }
+      nav li{
+    display:inline-block ;
+    list-style-type: none;
+    
+      }
+    nav li a{
+        font-size: 26px;
+        padding:0 10px;
+        color:white;
+        margin-left: 10px;
+        text-decoration: none;
+    }
+    nav li a:hover{
+      background-color:white;
+      color:black;
+      
+    }
+    img{
+      margin:0;
+      display:block;
+    width:100%;
+    height:610px;
+    }
+    
+    button {
+    position: absolute;
+    top: 70%;
+    left: 90%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: bold;
+    background-color: white;
+    color: rgba(217, 208, 193, 255);
+    height: 40px;
+    width: 350px;
+    color: rgb(2, 46, 135);
+    border-radius: 15px;
+    border: 2px solid white;
+    cursor: pointer;
+    list-style-type: none;
+}
+
+
+    .abtt{
+      float:right;
+      width:400px;
+      height: 350px;
+      margin-top: 50px;
+      margin-left: 20px;
+    }
+    
+    a{text-decoration: none;}
+    h2{
+        text-decoration:rgb(215, 209, 209);
+        text-decoration-color: rgb(10, 10, 10);
+        font-size: 40px;
+        font-weight: 100;
+        color:black;
+        font-style: normal;
+        font-family: Arial, Helvetica, sans-serif;
+        display:inline;
+        margin:0;
+    }
+    
+    p{
+          font-size: 20px;
+          margin-top: 20px;
+         margin-left: 10px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+
+    h3{margin:10px;}
+    .wt{
+      font-size: 20px;
+        margin: 10px;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    .wh{
+      font-size: 20px;
+        margin:0;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    .inner{
+        max-width:1200px;
+        margin:auto;
+        overflow:hidden;
+        padding:0 20px;
+        padding:0;
+    
+    }
+    .border{
+        width:180px;
+        height:0px;
+         
+        margin:26px auto;
+    }
+    
+    .row{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        
+    }
+    .col{
+        flex:0 0 33.33%;
+        max-width:33.33%;
+        box-sizing: border-box;
+        padding:20px;
+    }
+    .testimonals{
+        background:rgb(233, 232, 230);
+        padding:0px;
+       
+        text-align: center;
+       font-weight: bold;
+       border-radius:30px;
+       
+    }
+    
+    .testimonals img{
+        width: 200px;
+        height: 200px;
+        padding: 17px;
+       margin-top:0px;
+       margin-left: 65px;
+    
+    }
+     .name{
+        font-size: 20px;
+        text-transform: uppercase;
+        margin: 0px;
+        color:black;
+        margin-bottom:0px;
+        margin-top: 0px;
+     }
+    
+     .awards {
+    background-color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.awards h2 {
+    text-align: center;
+    color: #070707;
+    margin-bottom: 20px;
+}
+
+.award-info {
+    display: flex;
+    justify-content: space-around;
+}
+
+.award {
+    width: 30%;
+    text-align: left;
+}
+
+.award img {
+    width: 200px;
+    height: 180px;
+    margin-left:80px;
+    border-radius: 50%;
+
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.award h3 {
+    color: #007bff;
+    margin-bottom: 5px;
+}
+
+.award p {
+    color: #333;
+}
+
+    
+    .cont{
+      margin:0;
+      padding: 0px;
+      margin-top: 50px;
+      margin-bottom: 10px;
+    }
+    
+    
+    
+    
+    iframe{
+    
+    margin-bottom:0px;
+     width:500px;
+     float: right;
+     margin-right: 20px;
+    height: 160px;
+    
+   
+
+
+    }
+    
+    address {margin-left: 20px;
+      font-size: 18px;
+      font-family:Arial, Helvetica, sans-serif
+       }
+    
+    
+    
+    .testimonals:hover{background-color: white; color:black; border:10px solid rgb(2,46,135);
+     
+     }
+     .clinical-excellence {
+  padding-left: 70px;
+    text-align: left;
+    max-width: 800px;
+  }
+  
+  .number-container {
+    display: inline-block;
+    margin-left: 40px;
+    align-items: center;
+   padding-left: 110px;
+  }
+
+  .number {
+    font-size: 40px;
+    font-weight: bold;
+    color: #007bff;
+    margin: 10px 0;
+    display: inline-block;
+    
+  }
+
+  .label {
+    font-weight: bold;
+    color: #333;
+  }
+  footer {
+    background-color: rgb(2, 46, 135);
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    margin:auto;
+}
+
+.footer-content {
+    max-width: 800px;
+    height:20px;
+    margin:auto;
+}
+
+
+  @media (max-width: 600px) {
+    .number-container {
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+    </style>
+</head>
+<body>
+        
+    <header> 
+
+        <nav>
+            <div class="logo">
+                <p>EKA Hospital</P>
+
+            </div>
+    <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About </a></li>
+    <li><a href="#services">Specialities</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="register.html">Register</a></li>
+    <li><a href="login.html">Login</a></li>
+
+
+   </ul>
+  
+</nav>
+   </header >
+  
+  
+   <div> 
+    <img src="https://media.istockphoto.com/id/1369661892/photo/businessman-holding-virtual-blue-plus-sign-for-positive-thinking-mindset-or-healthcare.webp?b=1&s=170667a&w=0&k=20&c=UYSYQEqOA1cvZY-geOLxd4TQPGiO3Dns8o7vyuIZyeQ=">
+    
+    
+    <a href="appointment.php">
+        <button style="left: 600px;">Book Appointment</button>
+    </a>
+    
+    
+  
+  </div>
+  
+
+
+<h2 id="#home">About</h2>
+<img class="abtt" src="https://media.istockphoto.com/id/1394769128/photo/nurse-with-medical-file-at-hospital.webp?b=1&s=170667a&w=0&k=20&c=qT33cGsT6NZHK04itnGIzsaVwItOSBcAF_O70XQn8hg=">
+
+<p>
+  Eka Hospital, nestled in the heart of Bangalore, is dedicated to providing exceptional healthcare services with a compassionate touch. As a premier healthcare facility, Eka Hospital is committed to offering high-quality, patient-centric care at affordable rates.
+</p>
+<h3>Our Vision:</h3>
+
+<p> At Eka Hospital, we envision a healthier community where every individual receives comprehensive medical care tailored to their needs. Our goal is to become the healthcare provider of choice, known for our commitment to excellence, integrity, and compassion.</p>
+    <h3>Our Mission:</h3>
+    <p>Our mission is simple yet profound: to create a haven of healing that goes beyond treating ailments. We believe in a holistic approach to healthcare, addressing not just the physical aspects of illness but also the emotional and spiritual well-being of our patients.</p>
+<br>
+<br>
+<h2 id="services">Specialities</h2>
+
+        
+<div class="row">
+  <div class="col">
+    <a href="surgery.html">
+      <div  class="testimonals">
+          <img src="https://images.unsplash.com/photo-1571772996211-2f02c9727629?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8U3VyZ2VyeSUyMGxvZ298ZW58MHx8MHx8fDA%3D" alt="">
+    
+    <div class="name">Surgery</div>
+        
+         
+      </div>
+    </a>
+      </div>
+
+      <div class="col">
+          <div  class="testimonals">
+            <a href="cardiology.html"> 
+              <img src="https://media.istockphoto.com/id/1359314170/photo/heart-attack-and-heart-disease-3d-illustration.webp?b=1&s=170667a&w=0&k=20&c=fK2a-mCQ-dJA6066LnfQlN8awak_ZI6BsdKsmcQfCn8=" alt="">
+               <div class="name" >Cardiology</div> 
+            
+           
+           </ul>
+          </div>
+        </a> 
+          </div>
+
+
+          <div class="col">
+              <div  class="testimonals">
+                <a href="nephrology.html"> 
+                  <img src="https://media.istockphoto.com/id/1620226663/photo/human-kidney-urinary-system-anatomy.webp?b=1&s=170667a&w=0&k=20&c=rhRsCNc2uhVEqg7-F-MWmjCATj-rE_Rk2lt0TzC2xXk=" alt="">
+                  <div class="name" >Nephrology</div> 
+                
+                 
+              </div>
+            </a>
+              </div>
+</div> 
+</class>
+                 
+            
+        
+
+ 
+
+        
+    
+        <div class="row">
+            <div class="col">
+                <div  class="testimonals">
+                  <a href="maternity.html">
+                    <img src="https://images.unsplash.com/flagged/photo-1551049215-23fd6d2ac3f1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8bWF0ZXJuaXR5JTIwaG9zcGl0YWx8ZW58MHx8MHx8fDA%3D" alt="">
+                     <div class="name" >Maternity</div>
+                  
+                   
+                </div>
+              </a>
+                </div>
+        
+                <div class="col">
+                    <div  class="testimonals">
+                      <a href="dental.html"> 
+                        <img src="https://images.unsplash.com/photo-1606811951341-756fdd437682?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGRlbnRhbHxlbnwwfHwwfHx8MA%3D%3D" alt="">
+                         <div class="name" >Dental</div>
+                      
+                     
+                     </ul>
+                    </div>
+                  </a>
+                    </div>
+        
+        
+                    <div class="col">
+                        <div  class="testimonals">
+                          <a href="physiotherapy.html"> 
+                            <img src="https://media.istockphoto.com/id/1079107724/photo/patient-at-the-physiotherapy-doing-physical-exercises-with-his-therapist.webp?b=1&s=170667a&w=0&k=20&c=nBhOwFl6bmNln4bZJN2870mWa1RRSJMwblJJ1R3l4q4=" alt="">
+                               <div class="name" >Physiotherapy</div>
+                          
+                           
+                        </div>
+                      </a>
+                        </div>
+        </div> 
+        </class>
+        
+          <h2 style="margin:0px;">Awards and Certificates</h2>
+          <section class="awards">
+
+          <div class="award-info">
+              <div class="award">
+                  <img src="https://msrmh.com/wp-content/uploads/2021/12/72287458.png" alt="Award 1">
+                  
+                  <p>Awarded 7th Best Multispeciality Hospital in Banglore By times Health Survey 2021</p>
+              </div>
+              <div class="award">
+                  <img src="https://msrmh.com/wp-content/uploads/2021/12/cover2-1.jpg" alt="Award 2">
+                 
+                  <p>AHPI award for patient Friendly Hospital 2019</p>
+              </div>
+              <div class="award">
+                  <img src="https://msrmh.com/wp-content/uploads/2021/12/download-17.jfif_.png" alt="Award 3">
+                  
+                  <p>Accredited level IIIA,Special care Neontal Unit by National Neonatology Forum(NNF)</p>
+              </div>
+          </div>
+      </section>
+      
+        <h2  style="left:20px;">Clinical Excellence</h2><br>
+        <div class="clinical-excellence" id="clinical-excellence"></div>
+        <div class="number-container">
+          <span class="label">Years:</span>
+          <div class="number" id="years">0</div>
+          <span class="plus">+</span>
+        </div>
+        <div class="number-container">
+          <span class="label">Surgeries:</span>
+          <div class="number" id="surgeries">0</div>
+          <span class="plus">+</span>
+        </div>
+        <div class="number-container">
+          <span class="label">Doctors:</span>
+          <div class="number" id="doctors">0</div>
+          <span class="plus">+</span>
+        </div>
+        <div class="number-container">
+          <span class="label">Patients Served:</span>
+          <div class="number" id="patients">0</div>
+          <span class="plus">+</span>
+        </div>
+      </div>
+      <script>
+        function animateValue(id, start, end, duration) {
+            let current = start;
+            const range = end - start;
+            const increment = range / (duration / 10);
+            const obj = document.getElementById(id);
+            const timer = setInterval(() => {
+                current += increment;
+                obj.textContent = Math.floor(current);
+                if (current >= end) {
+                    clearInterval(timer);
+                    obj.textContent = end;
+                }
+            }, 10);
+        }
+
+        function startAnimation() {
+            animateValue("years", 0, 5, 3000); // Start from 0, end at 25, duration 3000ms (3 seconds)
+            animateValue("doctors", 0, 50, 3000);
+            animateValue("surgeries", 0, 100, 3000);
+            animateValue("patients", 0, 100000, 3000);
+        }
+
+        // Function to handle the intersection
+        function handleIntersection(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startAnimation();
+                    observer.unobserve(entry.target);
+                }
+            });
+        }
+
+        // Create an intersection observer instance
+        const observer = new IntersectionObserver(handleIntersection, {
+            root: null,
+            threshold: 0.2 // Adjust threshold as needed
+        });
+
+        // Start observing the target element when the window is loaded
+        window.addEventListener("load", function () {
+            const target = document.getElementById("contact");
+            observer.observe(target);
+        });
+    </script>
+
+      <div class="cont">
+<h2  id="contact">Contact</h2>
+<div>
+  <iframe  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5899.229005563601!2d77.58806155802468!3d13.032676923200599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae17bd97727093%3A0x5135aab8250c1df5!2sAtria%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1700285725616!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+</div>
+<div>
+<address>
+
+  Phone Number:<br>
+  9535305049<br>
+  <br>
+ 
+  Address:<br>
+   EKA Hospital,<br>
+   1st Main Road, Ags Colony, Anandnagar, Hebbal, Bengaluru,<br>
+    Karnataka 560024<br>
+
+     <br>
+ 
+</address>
+</div>
+</div>
+<footer>
+  <div class="footer-content">
+      <p>&copy; 2024 EKA Hospital. All rights reserved.</p>
+  </div>
+</footer>
+
+
+</body>
+</html>

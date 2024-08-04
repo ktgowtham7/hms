@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eka Hospital</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .hospital-name {
+            font-size: 24px;
+        }
+
+        .book-appointment {
+            background-color: #e5e6e8;
+            color: rgb(74, 109, 215);
+            border-radius: 5px;
+            font-weight: bold;
+            height: 30px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0 15px;
+        }
+
+        .book-appointment:hover {
+            background-color: #669fdc;
+            color:white;
+        }
+
+        .hospital-photo {
+            width: 100%;
+            height: 560px; /* Adjusted height */
+            object-fit: cover; /* Maintain aspect ratio */
+        }
+
+        .overview {
+            padding: 20px;
+        }
+
+        .overview h3 {
+            margin-top: 20px;
+            color: #007bff; /* Changed color */
+        }
+
+        .overview p {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .overview ol {
+            margin-left: 20px;
+            padding-left: 20px;
+            list-style: none;
+            counter-reset: list-counter; /* Reset counter */
+        }
+
+        .overview ol li {
+            position: relative;
+            padding-left: 30px; /* Adjusted padding */
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        .overview ol li::before {
+            content: counter(list-counter);
+            counter-increment: list-counter; /* Increment counter */
+            position: absolute;
+            left: 0;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .experts {
+            display: flex;
+            overflow-x: auto;
+            margin-top: 20px;
+            padding: 30px;
+            margin-left: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff; /* Added background color */
+
+        }
+
+        .expert {
+            margin-right: 20px; /* Adjusted margin */
+            background-color: #f9f9f9; /* Changed background color */
+            border-radius: 10px; /* Adjusted border radius */
+            padding: 30px; /* Adjusted padding */
+            width: 200px;
+            
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .expert:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .expert img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 10px; /* Centered image */
+            display: block;
+        }
+
+        .expert .info {
+            text-align: center;
+        }
+
+        .expert h4 {
+            margin: 5px 0;
+            font-size: 20px;
+            color: #007bff;
+        }
+
+        .expert p {
+            margin: 3px 0;
+            font-size: 16px;
+            color: #666;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            font-weight: bold;
+            height: 30px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 0 15px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%; /* Centered horizontally */
+            transform: translate(-50%, -50%);
+            font-size: 30px;
+            font-weight: bold;
+            color:  rgb(203, 206, 211);
+            z-index: 1; /* Ensure text is above image */
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: right;
+            position: relative;
+            bottom: 0;
+            
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            float:center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="hospital-name">Eka Hospital</div>
+            <button class="book-appointment">Book Appointment</button>
+        </div>
+    </header>
+
+    <img src="https://media.istockphoto.com/id/593305618/photo/putting-their-skills-to-good-use.jpg?s=612x612&w=0&k=20&c=_5_-dWH79KXUt0GXHgnzswN_rYQoNM425Ru4fPtE5OE=" alt="Hospital Photo" class="hospital-photo">
+    <h1>Surgery</h1>
+
+    <section class="overview">
+        <h2>Overview</h2>
+
+        <p>>Eka Hospital's Surgery department provides advanced surgical interventions and procedures for various medical conditions and diseases.
+       Our team of highly skilled surgeons, anesthesiologists, and support staff is dedicated to ensuring optimal outcomes for every patient.</p>
+
+        <h2> Features:</h2>
+        <ol>
+            <li>Comprehensive Surgical Services</li>
+            <li>State-of-the-Art Operating Theaters</li>
+            <li>Specialized Surgical Units</li>
+            <li>Postoperative Care</li>
+            <li>Minimally Invasive Techniques</li>
+            <li>Emergency Surgical Care</li>
+            <li>Collaborative Approach to Care</li>
+            <li>Advanced Surgical Equipment</li>
+            <li>Patient Education and Support</li>
+        </ol>
+
+        <h2> Treatment:</h2>
+        <ol>
+            <li>Comprehensive Surgical Services: A wide range of surgical procedures to address various medical conditions, including elective and emergency surgeries.</li>
+            <li>State-of-the-Art Operating Theaters: Well-equipped operating rooms with advanced technology and instrumentation for safe and efficient surgical procedures.</li>
+            <li>Specialized Surgical Units: Dedicated units for specific surgical specialties, such as orthopedic surgery, neurosurgery, and cardiovascular surgery.</li>
+            <li>Postoperative Care: Monitoring and support for patients after surgery to ensure proper healing and recovery.</li>
+            <li>Minimally Invasive Techniques: Surgical techniques that minimize trauma to the body, resulting in faster recovery times and reduced postoperative pain.</li>
+            <li>Emergency Surgical Care: Prompt surgical intervention for acute medical conditions and traumatic injuries requiring urgent treatment.</li>
+            <li>Collaborative Approach to Care: Multidisciplinary teams working together to provide comprehensive care tailored to each patient's needs.</li>
+            <li>Advanced Surgical Equipment: State-of-the-art surgical instruments and technology to enhance surgical precision and outcomes.</li>
+            <li>Patient Education and Support: Information and guidance for patients and their families before, during, and after surgery to promote understanding and compliance with treatment plans.</li>
+        </ol>
+        <h2>Experts</h2>
+        <div class="experts">
+            <div class="expert">
+                <img src="https://media.istockphoto.com/id/1139262934/photo/senior-indian-male-surgeon-in-blue-dress-standing-with-stethoscope-over-white-background.jpg?s=612x612&w=0&k=20&c=FGjks0rigEo_ZTu7t3qcR1pvAUuyZx9xKbJBEpopjqY=" alt="Expert Photo">
+                <div class="info">
+                    <h4>Name: Dr. Ramesh</h4>
+                    <p>Specialty: General Surgery</p>
+                    <p>Experiance:28years+</p>
+                    <a href="appointment.php"><button>Book Appointment</button></a>
+                </div>
+            </div>
+            <div class="expert">
+                <img src="https://media.istockphoto.com/id/1432559149/photo/senior-male-doctor-looking-at-camera.jpg?s=612x612&w=0&k=20&c=FIVAlctpXrdE53mpASUmjX0Ib5Gw7t4XSufx77PC_xQ=" alt="Expert Photo">
+                <div class="info">
+                    <h4>Name: Dr. Hari Prasad</h4>
+                    <p>Specialty: Orthopedic Surgery</p>
+                    <p>Experiance:31years+</p>
+                    <a href="appointment.php"><button>Book Appointment</button></a>
+                </div>
+            </div>
+            <div class="expert">
+                <img src="https://media.istockphoto.com/id/1298780374/photo/senior-male-doctor-looking-at-camera.jpg?s=612x612&w=0&k=20&c=OoFVt2BfRXmBXMyr_EknEpZOjij-T9Gp3FFVIMW_ix0=" alt="Expert Photo">
+                <div class="info">
+                    <h4>Name: Dr. Santhosh</h4>
+                    <p>Specialty: Cardiothoracic Surgery</p>
+                    <p>Experiance:30years+</p>
+                    <a href="appointment.php"><button>Book Appointment</button></a>
+                </div>
+            </div>
+            <div class="expert">
+                <img src="https://media.istockphoto.com/id/1174322666/photo/medical-professional-greets-patient-at-clinic.jpg?s=612x612&w=0&k=20&c=tHV2IcqtGPeA06tPI_XctVab5mrBtOm75QH86ptm0zo=" alt="Expert Photo">
+                <div class="info">
+                    <h4>Name: Dr. John </h4>
+                    <p>Specialty: Neurosurgery</p>
+                    <p>Experiance:32years+</p>
+                    <a href="appointment.php"><button>Book Appointment</button></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p style="margin-left:470px;">&copy; 2024 Eka Hospital. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
